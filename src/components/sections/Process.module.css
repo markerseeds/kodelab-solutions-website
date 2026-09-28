@@ -1,0 +1,8 @@
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; counter-reset: step; }
+.step { position: relative; padding: 28px 24px; border-radius: var(--radius); background: #fff; border: 1px solid var(--line); }
+.step::before { counter-increment: step; content: "0" counter(step); font-family: var(--font-space-grotesk); font-weight: 700; font-size: 2.2rem; background: linear-gradient(135deg, var(--brand), var(--brand-2)); -webkit-background-clip: text; background-clip: text; color: transparent; display: block; margin-bottom: 10px; }
+.step h3 { font-size: 1.1rem; margin-bottom: 6px; }
+.step p { color: var(--ink-soft); font-size: .93rem; }
+
+@media (max-width: 960px) { .steps { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 680px) { .steps { grid-template-columns: 1fr; } }

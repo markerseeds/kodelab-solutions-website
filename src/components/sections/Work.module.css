@@ -1,0 +1,15 @@
+.workGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.work { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: #fff; }
+.work .thumb { height: 180px; display: grid; place-items: center; color: #fff; font-family: var(--font-space-grotesk); font-weight: 600; font-size: 1.1rem; }
+.work .body { padding: 20px; }
+.work .body small { color: var(--brand); font-weight: 600; font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; }
+.work .body h3 { font-size: 1.05rem; margin: 4px 0 6px; }
+.work .body p { color: var(--ink-soft); font-size: .9rem; }
+/* `.quote` in the original. */
+.testimonials { margin-top: 48px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+.testimonials blockquote { background: var(--bg-soft); border-radius: var(--radius); padding: 28px; font-size: 1.02rem; }
+.testimonials cite { display: block; margin-top: 14px; font-style: normal; font-weight: 600; font-size: .9rem; }
+.testimonials cite span { display: block; font-weight: 400; color: var(--ink-soft); }
+
+@media (max-width: 960px) { .workGrid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 680px) { .workGrid, .testimonials { grid-template-columns: 1fr; } }

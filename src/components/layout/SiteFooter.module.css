@@ -1,0 +1,14 @@
+.footer { background: #070a1a; color: rgba(255, 255, 255, .65); padding: 56px 0 28px; font-size: .92rem; }
+.footGrid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 40px; }
+.footer h4 { color: #fff; font-family: var(--font-space-grotesk); margin-bottom: 14px; }
+.footer ul { list-style: none; display: grid; gap: 8px; }
+.footer a:hover { color: #fff; }
+.footer .brand { margin-bottom: 14px; }
+.about { max-width: 300px; }
+.copy { border-top: 1px solid rgba(255, 255, 255, .08); padding-top: 22px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+
+@media (max-width: 960px) { .footGrid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 680px) {
+  .footGrid { grid-template-columns: 1fr; }
+  .footer { padding-bottom: 90px; }
+}

@@ -1,0 +1,74 @@
+/* =====================================================================
+   KODELAB SOLUTIONS: tokens, reset and the primitives more than one
+   section uses. Everything section-specific lives in a CSS Module next
+   to its component. Values are carried over unchanged from
+   reference/kodelab-solutions.html.
+   ===================================================================== */
+
+/* ---------- Tokens ---------- */
+:root {
+  --bg: #ffffff;
+  --bg-soft: #f4f6fb;
+  --ink: #0d1330;
+  --ink-soft: #4a5275;
+  --line: #e3e7f2;
+  --brand: #4f46e5;
+  --brand-2: #06b6d4;
+  --brand-dark: #0b1026;
+  --ok: #10b981;
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(13, 19, 48, .08);
+  --max: 1160px;
+
+  /* --font-inter and --font-space-grotesk are injected by next/font
+     (app/layout.tsx), which may rename the families. Never write "Inter"
+     or "Space Grotesk" literally. These two rebuild the original's body
+     and heading stacks; where the original named one family alone (e.g.
+     `font-family: "Space Grotesk"`), modules use that variable alone. */
+  --font-body: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-inter), sans-serif;
+}
+
+/* ---------- Base ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { font-family: var(--font-body); color: var(--ink); background: var(--bg); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, .logo { font-family: var(--font-display); line-height: 1.15; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; }
+
+.skip {
+  position: absolute; left: 12px; top: -120px; z-index: 100;
+  padding: 10px 18px; border-radius: 999px;
+  background: var(--brand); color: #fff; font-weight: 600;
+}
+.skip:focus { top: 12px; }
+
+/* ---------- Layout ---------- */
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+section { padding: 96px 0; }
+.soft { background: var(--bg-soft); }
+.eyebrow { display: inline-block; font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--brand); margin-bottom: 12px; }
+.section-head { max-width: 640px; margin-bottom: 48px; }
+.section-head h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin-bottom: 12px; }
+.section-head p { color: var(--ink-soft); font-size: 1.05rem; }
+.center { text-align: center; margin-left: auto; margin-right: auto; }
+
+/* ---------- Buttons ---------- */
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; border-radius: 999px; font-weight: 600; font-size: .98rem; border: 0; cursor: pointer; transition: transform .15s, box-shadow .15s, background .15s; }
+.btn-primary { background: linear-gradient(135deg, var(--brand), #6d28d9); color: #fff; box-shadow: 0 8px 24px rgba(79, 70, 229, .35); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(79, 70, 229, .45); }
+.btn-ghost { background: rgba(255, 255, 255, .08); color: #fff; border: 1px solid rgba(255, 255, 255, .25); }
+.btn-ghost:hover { background: rgba(255, 255, 255, .16); }
+/* Scoped to .pkg in the original; only the package cards use it. Must stay after .btn. */
+.btn-outline { border: 1.5px solid var(--ink); color: var(--ink); background: transparent; }
+.btn-outline:hover { background: var(--ink); color: #fff; }
+
+/* ---------- Logo: global because the header and the footer share it ---------- */
+.logo { display: flex; align-items: center; gap: 10px; color: #fff; font-size: 1.25rem; font-weight: 700; }
+.logo-mark { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); display: grid; place-items: center; font-size: .85rem; font-weight: 700; color: #fff; }
+.logo span.light { font-weight: 500; opacity: .7; }
+
+@media (max-width: 960px) {
+  section { padding: 72px 0; }
+}

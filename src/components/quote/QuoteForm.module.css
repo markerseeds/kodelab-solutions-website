@@ -1,0 +1,31 @@
+.form { background: #fff; color: var(--ink); border-radius: 20px; padding: 34px; box-shadow: 0 30px 60px rgba(0, 0, 0, .3); }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.field { margin-bottom: 16px; }
+/* The original's bare `label` rule also styled the chips; .groupLabel replaces the chip group's <label>. */
+.form label, .groupLabel { display: block; font-weight: 600; font-size: .88rem; margin-bottom: 6px; }
+.form input, .form select, .form textarea { width: 100%; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 10px; font: inherit; font-size: .95rem; background: #fff; color: var(--ink); transition: border-color .15s, box-shadow .15s; }
+.form input:focus, .form select:focus, .form textarea:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 4px rgba(79, 70, 229, .12); }
+/* The original set an inline red border, which also beat :focus. */
+.form [aria-invalid="true"], .form [aria-invalid="true"]:focus { border-color: #ef4444; }
+.form textarea { min-height: 110px; resize: vertical; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { position: relative; }
+/* Visually hidden rather than display:none, so the checkboxes stay in the tab order. */
+.form .chip input { position: absolute; width: 1px; height: 1px; padding: 0; border: 0; margin: 0; opacity: 0; pointer-events: none; }
+.chip span { display: inline-block; padding: 8px 14px; border: 1.5px solid var(--line); border-radius: 999px; font-size: .88rem; cursor: pointer; user-select: none; transition: all .15s; }
+.chip input:checked + span { background: var(--brand); border-color: var(--brand); color: #fff; }
+.chip input:focus-visible + span { outline: 2px solid var(--brand); outline-offset: 2px; }
+.form :global(.btn) { width: 100%; justify-content: center; margin-top: 6px; }
+.form :global(.btn):disabled { opacity: .7; cursor: default; }
+.small { font-size: .8rem; color: var(--ink-soft); text-align: center; margin-top: 12px; }
+.error { font-size: .88rem; color: #dc2626; text-align: center; margin-top: 12px; }
+.success { text-align: center; padding: 40px 10px; }
+.success:focus { outline: none; }
+.big { font-size: 3rem; }
+.success h3 { font-size: 1.5rem; margin: 10px 0; }
+.success p { color: var(--ink-soft); }
+
+@media (max-width: 680px) {
+  .row { grid-template-columns: 1fr; }
+  .form { padding: 24px; }
+}

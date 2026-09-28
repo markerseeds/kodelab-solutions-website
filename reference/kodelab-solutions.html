@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kodelab Solutions | Websites, Software, Automation & AI</title>
+<meta name="description" content="Kodelab Solutions builds websites, custom software, business automation and AI tools for growing businesses. Get a free quote.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff;
+    --bg-soft:#f4f6fb;
+    --ink:#0d1330;
+    --ink-soft:#4a5275;
+    --line:#e3e7f2;
+    --brand:#4f46e5;
+    --brand-2:#06b6d4;
+    --brand-dark:#0b1026;
+    --ok:#10b981;
+    --radius:16px;
+    --shadow:0 10px 30px rgba(13,19,48,.08);
+    --max:1160px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,.logo{font-family:"Space Grotesk",Inter,sans-serif;line-height:1.15}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  section{padding:96px 0}
+  .eyebrow{display:inline-block;font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--brand);margin-bottom:12px}
+  .section-head{max-width:640px;margin-bottom:48px}
+  .section-head h2{font-size:clamp(1.8rem,3.5vw,2.6rem);margin-bottom:12px}
+  .section-head p{color:var(--ink-soft);font-size:1.05rem}
+  .center{text-align:center;margin-left:auto;margin-right:auto}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border-radius:999px;font-weight:600;font-size:.98rem;border:0;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s}
+  .btn-primary{background:linear-gradient(135deg,var(--brand),#6d28d9);color:#fff;box-shadow:0 8px 24px rgba(79,70,229,.35)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(79,70,229,.45)}
+  .btn-ghost{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.25)}
+  .btn-ghost:hover{background:rgba(255,255,255,.16)}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:50;background:rgba(11,16,38,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .logo{display:flex;align-items:center;gap:10px;color:#fff;font-size:1.25rem;font-weight:700}
+  .logo-mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand-2));display:grid;place-items:center;font-size:.85rem;font-weight:700;color:#fff}
+  .logo span.light{font-weight:500;opacity:.7}
+  .nav-links{display:flex;gap:28px;align-items:center}
+  .nav-links a{color:rgba(255,255,255,.8);font-size:.95rem;font-weight:500}
+  .nav-links a:hover{color:#fff}
+  .nav-links .btn{padding:10px 20px;font-size:.9rem;color:#fff}
+  .menu-btn{display:none;background:none;border:0;color:#fff;font-size:1.6rem;cursor:pointer}
+
+  /* Hero */
+  .hero{background:radial-gradient(1000px 500px at 80% -10%,rgba(6,182,212,.25),transparent 60%),radial-gradient(800px 500px at 0% 100%,rgba(79,70,229,.35),transparent 60%),var(--brand-dark);color:#fff;padding:110px 0 120px;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+  .pill{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);font-size:.85rem;margin-bottom:22px}
+  .pill .dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(16,185,129,.25)}
+  .hero h1{font-size:clamp(2.3rem,5vw,3.7rem);margin-bottom:20px;letter-spacing:-.02em}
+  .grad{background:linear-gradient(90deg,#a5b4fc,var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.lead{font-size:1.15rem;color:rgba(255,255,255,.78);max-width:540px;margin-bottom:32px}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px}
+  .trust{display:flex;gap:28px;flex-wrap:wrap;color:rgba(255,255,255,.7);font-size:.9rem}
+  .trust strong{display:block;color:#fff;font-family:"Space Grotesk";font-size:1.5rem}
+
+  .code-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:22px;box-shadow:0 30px 60px rgba(0,0,0,.35);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88rem}
+  .code-top{display:flex;gap:7px;margin-bottom:18px}
+  .code-top i{width:11px;height:11px;border-radius:50%;background:#ff5f57}
+  .code-top i:nth-child(2){background:#febc2e}.code-top i:nth-child(3){background:#28c840}
+  .code-card pre{white-space:pre-wrap;color:#cbd5ff;line-height:1.8}
+  .k{color:#c084fc}.s{color:#67e8f9}.c{color:#64748b}.f{color:#fbbf24}
+  .float-stat{margin-top:18px;display:flex;gap:12px}
+  .float-stat div{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px;font-family:Inter;font-size:.8rem;color:rgba(255,255,255,.7)}
+  .float-stat b{display:block;color:#fff;font-size:1.1rem;font-family:"Space Grotesk"}
+
+  /* Services */
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;transition:transform .2s,box-shadow .2s,border-color .2s}
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:#c7cdf5}
+  .icon{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;background:linear-gradient(135deg,rgba(79,70,229,.12),rgba(6,182,212,.12))}
+  .icon svg{width:26px;height:26px;stroke:var(--brand);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .card h3{font-size:1.2rem;margin-bottom:8px}
+  .card p{color:var(--ink-soft);font-size:.96rem;margin-bottom:14px}
+  .card ul{list-style:none;font-size:.9rem;color:var(--ink-soft)}
+  .card li{padding-left:22px;position:relative;margin-bottom:6px}
+  .card li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:700}
+
+  /* Problems / Why */
+  .soft{background:var(--bg-soft)}
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .problems{display:grid;gap:14px}
+  .problem{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .problem .x{flex:none;width:28px;height:28px;border-radius:8px;background:#fee2e2;color:#dc2626;display:grid;place-items:center;font-weight:700}
+  .problem .ok{background:#d1fae5;color:#059669}
+  .problem b{display:block;margin-bottom:2px}
+  .problem span{color:var(--ink-soft);font-size:.93rem}
+
+  /* Process */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;counter-reset:step}
+  .step{position:relative;padding:28px 24px;border-radius:var(--radius);background:#fff;border:1px solid var(--line)}
+  .step::before{counter-increment:step;content:"0" counter(step);font-family:"Space Grotesk";font-weight:700;font-size:2.2rem;background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent;display:block;margin-bottom:10px}
+  .step h3{font-size:1.1rem;margin-bottom:6px}
+  .step p{color:var(--ink-soft);font-size:.93rem}
+
+  /* Packages */
+  .pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+  .pkg{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:20px;padding:32px}
+  .pkg.featured{background:var(--brand-dark);color:#fff;border-color:transparent;box-shadow:0 20px 50px rgba(79,70,229,.3);position:relative}
+  .pkg.featured .tag{position:absolute;top:-13px;left:32px;background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#fff;font-size:.75rem;font-weight:600;padding:5px 12px;border-radius:999px}
+  .pkg h3{font-size:1.3rem;margin-bottom:4px}
+  .pkg .for{color:var(--ink-soft);font-size:.92rem;margin-bottom:18px}
+  .pkg.featured .for{color:rgba(255,255,255,.7)}
+  .pkg .price{font-family:"Space Grotesk";font-size:.9rem;color:var(--ink-soft);margin-bottom:22px}
+  .pkg .price b{display:block;font-size:2rem;color:var(--ink)}
+  .pkg.featured .price{color:rgba(255,255,255,.7)}.pkg.featured .price b{color:#fff}
+  .pkg ul{list-style:none;margin-bottom:28px;flex:1}
+  .pkg li{padding:7px 0 7px 26px;position:relative;font-size:.94rem;border-bottom:1px dashed var(--line)}
+  .pkg.featured li{border-color:rgba(255,255,255,.12)}
+  .pkg li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:700}
+  .pkg .btn{justify-content:center}
+  .pkg .btn-outline{border:1.5px solid var(--ink);color:var(--ink);background:transparent}
+  .pkg .btn-outline:hover{background:var(--ink);color:#fff}
+  .note{text-align:center;color:var(--ink-soft);font-size:.9rem;margin-top:24px}
+
+  /* Work / Testimonials */
+  .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .work{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:#fff}
+  .work .thumb{height:180px;display:grid;place-items:center;color:#fff;font-family:"Space Grotesk";font-weight:600;font-size:1.1rem}
+  .work .body{padding:20px}
+  .work .body small{color:var(--brand);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em}
+  .work .body h3{font-size:1.05rem;margin:4px 0 6px}
+  .work .body p{color:var(--ink-soft);font-size:.9rem}
+  .quote{margin-top:48px;display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .quote blockquote{background:var(--bg-soft);border-radius:var(--radius);padding:28px;font-size:1.02rem}
+  .quote cite{display:block;margin-top:14px;font-style:normal;font-weight:600;font-size:.9rem}
+  .quote cite span{display:block;font-weight:400;color:var(--ink-soft)}
+
+  /* FAQ */
+  .faq{max-width:780px;margin:0 auto}
+  details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:12px}
+  summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-size:1.4rem;line-height:1;color:var(--brand)}
+  details[open] summary::after{content:"–"}
+  details p{color:var(--ink-soft);margin-top:10px;font-size:.96rem}
+
+  /* Quote form */
+  .quote-sec{background:radial-gradient(800px 400px at 100% 0%,rgba(6,182,212,.2),transparent 60%),var(--brand-dark);color:#fff}
+  .quote-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:start}
+  .quote-sec .section-head p{color:rgba(255,255,255,.75)}
+  .contact-list{list-style:none;display:grid;gap:14px;margin-top:28px}
+  .contact-list li{display:flex;gap:12px;align-items:center;color:rgba(255,255,255,.85)}
+  .contact-list .ci{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.08);display:grid;place-items:center}
+  form{background:#fff;color:var(--ink);border-radius:20px;padding:34px;box-shadow:0 30px 60px rgba(0,0,0,.3)}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .field{margin-bottom:16px}
+  label{display:block;font-weight:600;font-size:.88rem;margin-bottom:6px}
+  input,select,textarea{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font:inherit;font-size:.95rem;background:#fff;color:var(--ink);transition:border-color .15s,box-shadow .15s}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 4px rgba(79,70,229,.12)}
+  textarea{min-height:110px;resize:vertical}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip input{display:none}
+  .chip span{display:inline-block;padding:8px 14px;border:1.5px solid var(--line);border-radius:999px;font-size:.88rem;cursor:pointer;user-select:none;transition:all .15s}
+  .chip input:checked+span{background:var(--brand);border-color:var(--brand);color:#fff}
+  form .btn{width:100%;justify-content:center;margin-top:6px}
+  .small{font-size:.8rem;color:var(--ink-soft);text-align:center;margin-top:12px}
+  .success{display:none;text-align:center;padding:40px 10px}
+  .success .big{font-size:3rem}
+  .success h3{font-size:1.5rem;margin:10px 0}
+  .success p{color:var(--ink-soft)}
+
+  /* Footer */
+  footer{background:#070a1a;color:rgba(255,255,255,.65);padding:56px 0 28px;font-size:.92rem}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;margin-bottom:40px}
+  footer h4{color:#fff;font-family:"Space Grotesk";margin-bottom:14px}
+  footer ul{list-style:none;display:grid;gap:8px}
+  footer a:hover{color:#fff}
+  .copy{border-top:1px solid rgba(255,255,255,.08);padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+  /* Floating CTA on mobile */
+  .mobile-cta{display:none}
+
+  @media (max-width:960px){
+    section{padding:72px 0}
+    .hero-grid,.why-grid,.quote-grid{grid-template-columns:1fr}
+    .services-grid,.pkg-grid,.work-grid{grid-template-columns:1fr 1fr}
+    .steps{grid-template-columns:1fr 1fr}
+    .foot-grid{grid-template-columns:1fr 1fr}
+    .pkg.featured{order:-1}
+  }
+  @media (max-width:680px){
+    .nav-links{display:none;position:absolute;top:70px;left:0;right:0;flex-direction:column;gap:0;background:var(--brand-dark);padding:10px 20px 20px;border-bottom:1px solid rgba(255,255,255,.1)}
+    .nav-links.open{display:flex}
+    .nav-links a{padding:12px 0;width:100%}
+    .menu-btn{display:block}
+    .hero{padding:72px 0 80px}
+    .services-grid,.pkg-grid,.work-grid,.steps,.quote,.row,.foot-grid{grid-template-columns:1fr}
+    form{padding:24px}
+    .mobile-cta{display:block;position:fixed;bottom:16px;left:16px;right:16px;z-index:60}
+    .mobile-cta .btn{width:100%;justify-content:center}
+    footer{padding-bottom:90px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="logo"><div class="logo-mark">&lt;/&gt;</div>Kodelab <span class="light">Solutions</span></a>
+    <button class="menu-btn" aria-label="Open menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#process">How We Work</a>
+      <a href="#packages">Packages</a>
+      <a href="#work">Our Work</a>
+      <a href="#faq">FAQ</a>
+      <a href="#quote" class="btn btn-primary">Get a Free Quote</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="pill"><span class="dot"></span> Now taking new projects. Free quote in 24 hours.</div>
+      <h1>Tech that makes your business <span class="grad">faster, smarter, and easier to run.</span></h1>
+      <p class="lead">We build websites, custom software, and AI tools. We also set up your hosting and domain, and automate the boring work. One team for all your tech needs.</p>
+      <div class="hero-ctas">
+        <a href="#quote" class="btn btn-primary">Get a Free Quote →</a>
+        <a href="#services" class="btn btn-ghost">See Our Services</a>
+      </div>
+      <div class="trust">
+        <div><strong>1 team</strong>for all your tech</div>
+        <div><strong>24 hrs</strong>quote turnaround</div>
+        <div><strong>100%</strong>you own your code</div>
+      </div>
+    </div>
+    <div class="code-card" aria-hidden="true">
+      <div class="code-top"><i></i><i></i><i></i></div>
+<pre><span class="c">// your business, upgraded</span>
+<span class="k">const</span> business = <span class="f">kodelab</span>.build({
+  website:    <span class="s">"fast + mobile-ready"</span>,
+  hosting:    <span class="s">"secure, 24/7"</span>,
+  software:   <span class="s">"made for your workflow"</span>,
+  automation: <span class="s">"no more manual work"</span>,
+  ai:         <span class="s">"answers customers for you"</span>,
+});
+
+business.<span class="f">grow</span>(); <span class="c">// ✓ done</span></pre>
+      <div class="float-stat">
+        <div><b>− 20 hrs</b>manual work per week</div>
+        <div><b>+ 3×</b>faster replies to customers</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SERVICES ========== -->
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">What we do</span>
+      <h2>Everything tech, all in one place</h2>
+      <p>No need to hire five different people. We plan, build, and take care of your tech from start to finish.</p>
+    </div>
+    <div class="services-grid">
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M8 21h8M12 18v3"/></svg></div>
+        <h3>Website Design & Development</h3>
+        <p>Modern websites that look great on phones and turn visitors into customers.</p>
+        <ul><li>Business & company websites</li><li>Online stores (e-commerce)</li><li>Landing pages for ads</li></ul>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M6 10a6 6 0 0 1 11.3-2.8A4.5 4.5 0 1 1 18 16H7a4 4 0 0 1-1-7.9"/><path d="M12 13v6M9 16l3 3 3-3"/></svg></div>
+        <h3>Hosting & Domain</h3>
+        <p>We set up and look after your website. It stays online, fast, and safe.</p>
+        <ul><li>Domain registration (.com, .ph)</li><li>Fast, secure cloud hosting</li><li>Business email & SSL</li></ul>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></div>
+        <h3>Custom Software & Apps</h3>
+        <p>Programs made for how <em>your</em> business works, not generic tools that don't fit.</p>
+        <ul><li>Web apps & dashboards</li><li>Inventory, POS & booking systems</li><li>Customer portals</li></ul>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 6h10M4 12h16M4 18h7"/><circle cx="18" cy="6" r="2"/><circle cx="15" cy="18" r="2"/></svg></div>
+        <h3>Business Process Automation</h3>
+        <p>We find the slow, manual tasks in your business and make them run by themselves.</p>
+        <ul><li>Auto reports & invoices</li><li>Connect your apps together</li><li>Less copy-paste, fewer errors</li></ul>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8z"/><path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z"/></svg></div>
+        <h3>AI Solutions</h3>
+        <p>Put AI to work in your business: answering customers, writing content, and sorting data.</p>
+        <ul><li>AI chatbots for FB & website</li><li>AI assistants for your team</li><li>Document & data processing</li></ul>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/><path d="M12 8v4l3 2"/></svg></div>
+        <h3>Tech Consulting & Support</h3>
+        <p>Not sure what you need? We'll give you a clear plan and support you after launch.</p>
+        <ul><li>Tech planning & advice</li><li>Maintenance & updates</li><li>Monthly support plans</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PROBLEMS → SOLUTIONS ========== -->
+<section class="soft">
+  <div class="wrap why-grid">
+    <div>
+      <span class="eyebrow">Sound familiar?</span>
+      <h2 style="font-size:clamp(1.8rem,3.5vw,2.6rem);margin-bottom:14px">Your business is growing, but your tech isn't keeping up.</h2>
+      <p style="color:var(--ink-soft);font-size:1.05rem;margin-bottom:24px">Many business owners lose hours every week on manual work, old websites, and tools that don't talk to each other. We fix that.</p>
+      <a href="#quote" class="btn btn-primary">Tell Us Your Problem →</a>
+    </div>
+    <div class="problems">
+      <div class="problem"><div class="x">✕</div><div><b>"Our website is old and slow."</b><span>Customers leave before they even see your products.</span></div></div>
+      <div class="problem"><div class="x">✕</div><div><b>"We still use Excel and paper for everything."</b><span>Mistakes happen and data gets lost.</span></div></div>
+      <div class="problem"><div class="x">✕</div><div><b>"We can't reply to every customer message."</b><span>Slow replies mean lost sales.</span></div></div>
+      <div class="problem"><div class="x ok">✓</div><div><b>With Kodelab Solutions</b><span>A fast website, simple systems, and AI that works for you 24/7.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PROCESS ========== -->
+<section id="process">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">How we work</span>
+      <h2>Simple, clear, no surprises</h2>
+      <p>You always know what's happening, what it costs, and when it will be done.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>Free Consultation</h3><p>Tell us your goals and problems. We listen first and ask the right questions.</p></div>
+      <div class="step"><h3>Clear Quote & Plan</h3><p>You get a fixed price, a timeline, and exactly what's included. No hidden fees.</p></div>
+      <div class="step"><h3>Build & Update You</h3><p>We build in small steps and show you progress every week.</p></div>
+      <div class="step"><h3>Launch & Support</h3><p>We go live, train your team, and stay with you after launch.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PACKAGES ========== -->
+<section id="packages" class="soft">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">Packages</span>
+      <h2>Start small or go big</h2>
+      <p>Every business is different, so every quote is made for you. Here's where most clients start.</p>
+    </div>
+    <div class="pkg-grid">
+      <div class="pkg">
+        <h3>Starter Website</h3>
+        <p class="for">For small businesses and new brands</p>
+        <div class="price">Starts at<b>₱XX,XXX</b></div>
+        <ul>
+          <li>Up to 5-page website</li>
+          <li>Mobile-friendly design</li>
+          <li>Domain + 1 year hosting</li>
+          <li>Business email setup</li>
+          <li>Contact form & Google Maps</li>
+        </ul>
+        <a href="#quote" class="btn btn-outline" data-service="Website">Get a Quote</a>
+      </div>
+      <div class="pkg featured">
+        <span class="tag">Most Popular</span>
+        <h3>Business Growth</h3>
+        <p class="for">For businesses ready to automate</p>
+        <div class="price">Starts at<b>₱XX,XXX</b></div>
+        <ul>
+          <li>Everything in Starter</li>
+          <li>Online store or booking system</li>
+          <li>1 automated workflow</li>
+          <li>AI chatbot for website / FB</li>
+          <li>3 months support</li>
+        </ul>
+        <a href="#quote" class="btn btn-primary" data-service="Automation">Get a Quote</a>
+      </div>
+      <div class="pkg">
+        <h3>Custom Solution</h3>
+        <p class="for">For unique systems & bigger projects</p>
+        <div class="price">Priced per project<b>Let's talk</b></div>
+        <ul>
+          <li>Custom software or web app</li>
+          <li>Connect to your current tools</li>
+          <li>AI built into your workflow</li>
+          <li>Cloud setup & security</li>
+          <li>Ongoing support plan</li>
+        </ul>
+        <a href="#quote" class="btn btn-outline" data-service="Custom Software">Get a Quote</a>
+      </div>
+    </div>
+    <p class="note">All prices in PHP. Final price depends on your needs. We'll send an exact quote after a free call.</p>
+  </div>
+</section>
+
+<!-- ========== WORK / TESTIMONIALS ========== -->
+<section id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Our work</span>
+      <h2>Projects we're proud of</h2>
+      <p>A few examples of what we build. <em>(Replace these with your real projects.)</em></p>
+    </div>
+    <div class="work-grid">
+      <div class="work"><div class="thumb" style="background:linear-gradient(135deg,#4f46e5,#06b6d4)">Online Store</div><div class="body"><small>E-commerce</small><h3>Retail Shop Website</h3><p>New online store connected to their stock system. Orders now come in 24/7.</p></div></div>
+      <div class="work"><div class="thumb" style="background:linear-gradient(135deg,#0ea5e9,#10b981)">Inventory Dashboard</div><div class="body"><small>Custom Software</small><h3>Multi-Channel Inventory</h3><p>One dashboard for stock across many sales channels. No more manual counting.</p></div></div>
+      <div class="work"><div class="thumb" style="background:linear-gradient(135deg,#7c3aed,#ec4899)">AI Assistant</div><div class="body"><small>AI + Automation</small><h3>Customer Reply Bot</h3><p>An AI chatbot that answers common questions and passes hot leads to the team.</p></div></div>
+    </div>
+    <div class="quote">
+      <blockquote>"Sample testimonial: add a real client quote here after your first projects."<cite>Client Name<span>Owner, Business Name</span></cite></blockquote>
+      <blockquote>"Sample testimonial: short, specific results work best, like 'saved us 10 hours a week'."<cite>Client Name<span>Manager, Business Name</span></cite></blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section id="faq" class="soft">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">FAQ</span>
+      <h2>Questions we get a lot</h2>
+    </div>
+    <div class="faq">
+      <details open><summary>How much does a website or system cost?</summary><p>It depends on what you need. A simple website costs much less than a custom system. Send us your details and we'll give you a clear, fixed quote. It's free.</p></details>
+      <details><summary>How long does a project take?</summary><p>A simple website usually takes 1–3 weeks. Custom software or automation can take 4–12 weeks, depending on the size. Your quote will include the timeline.</p></details>
+      <details><summary>I'm not techy. Can you still help me?</summary><p>Yes! Most of our clients are business owners, not tech people. We explain things in simple words and handle all the technical parts.</p></details>
+      <details><summary>Do I own my website and code?</summary><p>Yes. Once the project is paid, the website, code, and domain are 100% yours.</p></details>
+      <details><summary>Do you work with clients outside the Philippines?</summary><p>Yes. We work online with clients anywhere, using video calls, chat, and email.</p></details>
+      <details><summary>What happens after launch?</summary><p>We don't disappear. Every project comes with free support after launch, and we offer monthly plans for updates, backups, and new features.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ========== QUOTE FORM ========== -->
+<section id="quote" class="quote-sec">
+  <div class="wrap quote-grid">
+    <div>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow" style="color:#67e8f9">Get a free quote</span>
+        <h2>Let's build something great together</h2>
+        <p>Tell us a little about your project. We'll reply within 24 hours with ideas and a clear price. No pressure, no commitment.</p>
+      </div>
+      <ul class="contact-list">
+        <li><div class="ci">✉️</div>hello@kodelabsolutions.com</li>
+        <li><div class="ci">📱</div>+63 9XX XXX XXXX (Viber / WhatsApp)</li>
+        <li><div class="ci">💬</div>facebook.com/kodelabsolutions</li>
+        <li><div class="ci">📍</div>Philippines · Serving clients worldwide</li>
+      </ul>
+    </div>
+
+    <form id="quoteForm" novalidate>
+      <div id="formFields">
+        <div class="row">
+          <div class="field"><label for="name">Your name *</label><input id="name" required placeholder="Juan Dela Cruz"></div>
+          <div class="field"><label for="biz">Business name</label><input id="biz" placeholder="Your Company Inc."></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="email">Email *</label><input id="email" type="email" required placeholder="you@email.com"></div>
+          <div class="field"><label for="phone">Phone / Viber</label><input id="phone" placeholder="+63 9XX XXX XXXX"></div>
+        </div>
+        <div class="field">
+          <label>What do you need? (pick all that apply)</label>
+          <div class="chips" id="chips">
+            <label class="chip"><input type="checkbox" value="Website"><span>Website</span></label>
+            <label class="chip"><input type="checkbox" value="Hosting & Domain"><span>Hosting & Domain</span></label>
+            <label class="chip"><input type="checkbox" value="Custom Software"><span>Custom Software</span></label>
+            <label class="chip"><input type="checkbox" value="Automation"><span>Automation</span></label>
+            <label class="chip"><input type="checkbox" value="AI Solutions"><span>AI Solutions</span></label>
+            <label class="chip"><input type="checkbox" value="Not sure yet"><span>Not sure yet</span></label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="budget">Budget range</label>
+            <select id="budget"><option value="">Select one</option><option>Below ₱30,000</option><option>₱30,000 – ₱80,000</option><option>₱80,000 – ₱200,000</option><option>₱200,000+</option><option>Not sure yet</option></select>
+          </div>
+          <div class="field"><label for="time">When do you need it?</label>
+            <select id="time"><option value="">Select one</option><option>ASAP</option><option>Within 1 month</option><option>1–3 months</option><option>Just exploring</option></select>
+          </div>
+        </div>
+        <div class="field"><label for="msg">Tell us about your project *</label><textarea id="msg" required placeholder="Example: I run a small shop and want an online store connected to my inventory..."></textarea></div>
+        <button type="submit" class="btn btn-primary">Send My Free Quote Request →</button>
+        <p class="small">We reply within 24 hours. Your info stays private.</p>
+      </div>
+      <div class="success" id="success">
+        <div class="big">🎉</div>
+        <h3>Thank you! We got your request.</h3>
+        <p>We'll email you within 24 hours with next steps and your free quote.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="logo" style="margin-bottom:14px"><div class="logo-mark">&lt;/&gt;</div>Kodelab <span class="light">Solutions</span></a>
+        <p style="max-width:300px">Websites, software, automation, and AI for growing businesses. Built in the Philippines for clients everywhere.</p>
+      </div>
+      <div><h4>Services</h4><ul><li><a href="#services">Websites</a></li><li><a href="#services">Hosting & Domain</a></li><li><a href="#services">Custom Software</a></li><li><a href="#services">Automation & AI</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#process">How We Work</a></li><li><a href="#work">Our Work</a></li><li><a href="#faq">FAQ</a></li><li><a href="#quote">Contact</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li>hello@kodelabsolutions.com</li><li>+63 9XX XXX XXXX</li><li>Philippines</li></ul></div>
+    </div>
+    <div class="copy"><span>© <span id="yr"></span> Kodelab Solutions. All rights reserved.</span><span>kodelabsolutions.com</span></div>
+  </div>
+</footer>
+
+<div class="mobile-cta"><a href="#quote" class="btn btn-primary">Get a Free Quote →</a></div>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Close mobile menu after clicking a link
+  document.querySelectorAll('.nav-links a').forEach(a =>
+    a.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('open')));
+
+  // Package buttons pre-select the matching service in the form
+  document.querySelectorAll('[data-service]').forEach(btn =>
+    btn.addEventListener('click', () => {
+      const v = btn.dataset.service;
+      document.querySelectorAll('#chips input').forEach(c => { if (c.value === v) c.checked = true; });
+    }));
+
+  // Mockup form: simple check, then show thank-you message.
+  // To make it real, connect to Formspree, Google Forms, or your own backend.
+  document.getElementById('quoteForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const req = ['name','email','msg'].map(id => document.getElementById(id));
+    let ok = true;
+    req.forEach(f => {
+      const bad = !f.value.trim() || (f.type === 'email' && !/^\S+@\S+\.\S+$/.test(f.value));
+      f.style.borderColor = bad ? '#ef4444' : '';
+      if (bad) ok = false;
+    });
+    if (!ok) return;
+    document.getElementById('formFields').style.display = 'none';
+    document.getElementById('success').style.display = 'block';
+  });
+</script>
+</body>
+</html>
