@@ -31,19 +31,6 @@ const PACKAGES: {
     // No service: a project can be any of them, so the visitor picks.
   },
   {
-    name: "Project + Retainer",
-    tag: "One-off + monthly",
-    audience: "For when you want it built and looked after",
-    summary: "We build it, then keep it running for you: hosted on our servers, updated, and looked after every month.",
-    features: [
-      "Everything in Project to build it",
-      "Everything in Retainer once it's live",
-      "Hosted on our servers from launch day",
-      "One team from first idea to everyday running",
-    ],
-    service: "Hosting & Domain",
-  },
-  {
     name: "Retainer",
     tag: "Monthly",
     audience: "For when you want it looked after",
@@ -57,6 +44,19 @@ const PACKAGES: {
     ],
     service: "Hosting & Domain",
     featured: true,
+  },
+  {
+    name: "Project + Retainer",
+    tag: "One-off + monthly",
+    audience: "For when you want it built and looked after",
+    summary: "We build it, then keep it running for you: hosted on our servers, updated, and looked after every month.",
+    features: [
+      "Everything in Project to build it",
+      "Everything in Retainer once it's live",
+      "Hosted on our servers from launch day",
+      "One team from first idea to everyday running",
+    ],
+    service: "Hosting & Domain",
   },
 ];
 
