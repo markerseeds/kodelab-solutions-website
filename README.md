@@ -5,7 +5,8 @@ for growing businesses. Ported from a single 549-line HTML file to Next.js 16 /
 React 19 / TypeScript. The original is kept at
 [`reference/kodelab-solutions.html`](reference/kodelab-solutions.html) for
 side-by-side comparison, and the port renders pixel-identically to it at desktop,
-tablet and phone widths.
+tablet and phone widths, except for the Packages section, which was redesigned after
+the port (Project / Retainer instead of priced tiers).
 
 ```bash
 npm install
@@ -30,7 +31,7 @@ in a `.module.css` next to its component.
 | Behaviour | Where |
 |---|---|
 | Mobile menu: toggle; closes on a link tap, a tap anywhere else, or Escape | `components/layout/SiteHeader.tsx` |
-| Package "Get a Quote" links tick their service in the form | `components/quote/QuoteLink.tsx` → `lib/quote-state.tsx` → `components/quote/QuoteForm.tsx` |
+| Package "Get a Quote" links tick their service (if any) in the form | `components/quote/QuoteLink.tsx` → `lib/quote-state.tsx` → `components/quote/QuoteForm.tsx` |
 | Quote form validation (focus jumps to the first invalid field) and thank-you message | `components/quote/QuoteForm.tsx`, rules in `lib/quote.ts` (unit-tested) |
 | Send stays disabled until the page has hydrated, so a too-early tap can't put the visitor's details in the URL | `components/quote/QuoteForm.tsx` |
 | Footer year that follows the visitor's clock | `components/layout/CurrentYear.tsx` |
@@ -73,7 +74,6 @@ These are still placeholders carried over from the original page:
 
 - [ ] **The quote form sends nothing.** Wire up `src/lib/submit-quote.ts` (see above)
       before sending visitors to the site.
-- [ ] Package prices `₱XX,XXX`: `src/components/sections/Packages.tsx`.
 - [ ] Phone number `+63 9XX XXX XXXX`: `SITE.phone` in `src/lib/site.ts`.
 - [ ] Project cards and the "(Replace these with your real projects.)" note:
       `src/components/sections/Work.tsx`.
@@ -117,8 +117,9 @@ These are still placeholders carried over from the original page:
 7. **The form handles `onSubmit` itself rather than using `<form action>`.** React 19
    resets uncontrolled fields after every form action, which would wipe the
    visitor's input on a validation error.
-8. **Package CTAs take a `ServiceOption`**, so a package can only pre-select a chip
-   that exists. Add new services to `SERVICE_OPTIONS` in `src/lib/quote.ts`.
+8. **A package CTA pre-selects at most one `ServiceOption`**, so it can only tick a
+   chip that exists (Project ticks none, since a project can be any service). Add new
+   services to `SERVICE_OPTIONS` in `src/lib/quote.ts`.
 9. **`next dev` can fail after `next build` with "next/font/google queries have
    exactly one entry"** (a 500 on every page, pointing at the Inter font CSS). That's
    stale Turbopack dev state, not the code: delete `.next/dev` (or all of `.next`) and

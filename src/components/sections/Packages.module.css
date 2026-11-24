@@ -1,14 +1,12 @@
 .pkgGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: stretch; }
-.pkg { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 32px; }
-.pkg.featured { background: var(--brand-dark); color: #fff; border-color: transparent; box-shadow: 0 20px 50px rgba(79, 70, 229, .3); position: relative; }
-.pkg.featured .tag { position: absolute; top: -13px; left: 32px; background: linear-gradient(90deg, var(--brand), var(--brand-2)); color: #fff; font-size: .75rem; font-weight: 600; padding: 5px 12px; border-radius: 999px; }
-.pkg h3 { font-size: 1.3rem; margin-bottom: 4px; }
-.pkg .for { color: var(--ink-soft); font-size: .92rem; margin-bottom: 18px; }
+.pkg { position: relative; display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 32px; }
+.pkg.featured { background: var(--brand-dark); color: #fff; border-color: transparent; box-shadow: 0 20px 50px rgba(79, 70, 229, .3); }
+.pkg .tag { position: absolute; top: -13px; left: 32px; background: linear-gradient(90deg, var(--brand), var(--brand-2)); color: #fff; font-size: .75rem; font-weight: 600; padding: 5px 12px; border-radius: 999px; }
+.pkg h3 { font-size: 1.75rem; margin: 6px 0 4px; }
+.pkg .for { color: var(--ink-soft); font-size: .92rem; margin-bottom: 16px; }
 .pkg.featured .for { color: rgba(255, 255, 255, .7); }
-.pkg .price { font-family: var(--font-space-grotesk); font-size: .9rem; color: var(--ink-soft); margin-bottom: 22px; }
-.pkg .price b { display: block; font-size: 2rem; color: var(--ink); }
-.pkg.featured .price { color: rgba(255, 255, 255, .7); }
-.pkg.featured .price b { color: #fff; }
+.pkg .summary { font-size: .98rem; line-height: 1.55; font-weight: 500; background: var(--bg-soft); border-radius: 12px; padding: 14px 16px; margin-bottom: 22px; }
+.pkg.featured .summary { color: rgba(255, 255, 255, .9); background: rgba(255, 255, 255, .07); }
 .pkg ul { list-style: none; margin-bottom: 28px; flex: 1; }
 .pkg li { padding: 7px 0 7px 26px; position: relative; font-size: .94rem; border-bottom: 1px dashed var(--line); }
 .pkg.featured li { border-color: rgba(255, 255, 255, .12); }
@@ -18,6 +16,10 @@
 
 @media (max-width: 960px) {
   .pkgGrid { grid-template-columns: 1fr 1fr; }
-  .pkg.featured { order: -1; }
+  /* Cards keep their order; an odd card out sits centered under the others. */
+  .pkg:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc((100% - 22px) / 2); }
 }
-@media (max-width: 680px) { .pkgGrid { grid-template-columns: 1fr; } }
+@media (max-width: 680px) {
+  .pkgGrid { grid-template-columns: 1fr; }
+  .pkg:last-child:nth-child(odd) { width: auto; justify-self: stretch; }
+}

@@ -4,59 +4,59 @@ import type { ServiceOption } from "@/lib/quote";
 import { SectionHead } from "./SectionHead";
 import styles from "./Packages.module.css";
 
-// Prices are still placeholders: see README "Before launch".
 const PACKAGES: {
   name: string;
+  /** The pill on the card's top edge: one-off, monthly, or both. */
+  tag: string;
   audience: string;
-  priceLabel: string;
-  price: string;
+  /** The short "how it works" panel under the audience line. */
+  summary: string;
   features: string[];
-  /** The quote-form chip this package's "Get a Quote" link ticks. */
-  service: ServiceOption;
+  /** The quote-form chip this package's "Get a Quote" link ticks, if any. */
+  service?: ServiceOption;
   featured?: boolean;
 }[] = [
   {
-    name: "Starter Website",
-    audience: "For small businesses and new brands",
-    priceLabel: "Starts at",
-    price: "₱XX,XXX",
+    name: "Project",
+    tag: "One-off",
+    audience: "For when you need something built",
+    summary: "We plan it, build it, and hand it over. Once it's live, it's all yours, and you won't need anything else from us.",
     features: [
-      "Up to 5-page website",
-      "Mobile-friendly design",
-      "Domain + 1 year hosting",
-      "Business email setup",
-      "Contact form & Google Maps",
+      "A website, web app, automation or AI tool",
+      "Clear scope & timeline before we start",
+      "Progress updates every week",
+      "Launch, training & full handover",
+      "Code, domain & logins are 100% yours",
     ],
-    service: "Website",
+    // No service: a project can be any of them, so the visitor picks.
   },
   {
-    name: "Business Growth",
-    audience: "For businesses ready to automate",
-    priceLabel: "Starts at",
-    price: "₱XX,XXX",
+    name: "Project + Retainer",
+    tag: "One-off + monthly",
+    audience: "For when you want it built and looked after",
+    summary: "We build it, then keep it running for you: hosted on our servers, updated, and looked after every month.",
     features: [
-      "Everything in Starter",
-      "Online store or booking system",
-      "1 automated workflow",
-      "AI chatbot for website / FB",
-      "3 months support",
+      "Everything in Project to build it",
+      "Everything in Retainer once it's live",
+      "Hosted on our servers from launch day",
+      "One team from first idea to everyday running",
     ],
-    service: "Automation",
+    service: "Hosting & Domain",
+  },
+  {
+    name: "Retainer",
+    tag: "Monthly",
+    audience: "For when you want it looked after",
+    summary: "We host your website or system on our servers and look after it every month, so you never have to think about it.",
+    features: [
+      "Hosting on our secure cloud servers",
+      "Domain, SSL & business email handled",
+      "Updates, backups & fixes if anything breaks",
+      "Small changes & new features each month",
+      "You still own your code & domain",
+    ],
+    service: "Hosting & Domain",
     featured: true,
-  },
-  {
-    name: "Custom Solution",
-    audience: "For unique systems & bigger projects",
-    priceLabel: "Priced per project",
-    price: "Let's talk",
-    features: [
-      "Custom software or web app",
-      "Connect to your current tools",
-      "AI built into your workflow",
-      "Cloud setup & security",
-      "Ongoing support plan",
-    ],
-    service: "Custom Software",
   },
 ];
 
@@ -64,19 +64,16 @@ export function Packages() {
   return (
     <section id="packages" className="soft">
       <div className="wrap">
-        <SectionHead center eyebrow="Packages" title="Start small or go big">
-          Every business is different, so every quote is made for you. Here&apos;s where most clients start.
+        <SectionHead center eyebrow="Packages" title="Three ways to work with us">
+          Have us build it once, look after it every month, or both. Every business is different, so every quote is made for you.
         </SectionHead>
         <div className={styles.pkgGrid}>
           {PACKAGES.map((pkg) => (
             <div className={clsx(styles.pkg, pkg.featured && styles.featured)} key={pkg.name}>
-              {pkg.featured && <span className={styles.tag}>Most Popular</span>}
+              <span className={styles.tag}>{pkg.tag}</span>
               <h3>{pkg.name}</h3>
               <p className={styles.for}>{pkg.audience}</p>
-              <div className={styles.price}>
-                {pkg.priceLabel}
-                <b>{pkg.price}</b>
-              </div>
+              <p className={styles.summary}>{pkg.summary}</p>
               <ul>
                 {pkg.features.map((feature) => (
                   <li key={feature}>{feature}</li>
@@ -89,7 +86,7 @@ export function Packages() {
           ))}
         </div>
         <p className={styles.note}>
-          All prices in PHP. Final price depends on your needs. We&apos;ll send an exact quote after a free call.
+          Not sure which one fits? We&apos;ll help you choose on a free call.
         </p>
       </div>
     </section>
